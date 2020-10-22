@@ -1,0 +1,20 @@
+<atlassian-plugin key="${atlassian.plugin.key}" name="${project.name}" plugins-version="2">
+    <plugin-info>
+        <description>${project.description}</description>
+        <version>${project.version}</version>
+        <vendor name="${project.organization.name}" url="${project.organization.url}" />
+    </plugin-info>
+
+    <!-- add our i18n resource -->
+    <resource type="i18n" name="i18n" location="standarts"/>
+
+    <rest key="rest" path="/standarts" version="1.0" />
+
+    <webwork1 key="standarts-example-page" class="java.lang.Object" roles-required="admin">
+        <actions>
+            <action name="ru.mail.jira.plugins.standarts.actions.ExampleAction" alias="example-page">
+                <view name="success">/templates/example-view.vm</view>
+            </action>
+        </actions>
+    </webwork1>
+</atlassian-plugin>

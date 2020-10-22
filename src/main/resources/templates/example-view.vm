@@ -1,0 +1,10 @@
+<html>
+<head>
+    <title>Standarts example view page</title>
+    <meta name="decorator" content="atl.general"/>
+    $webResourceManager.requireResource("ru.mail.jira.plugins.standarts:entrypoint-example-entry")
+</head>
+<body>
+    <div id="standarts-root-container"/>
+</body>
+</html>

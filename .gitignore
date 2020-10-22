@@ -3,7 +3,7 @@
 target
 .DS_Store
 
-front/node_modules
-front/
+js/node_modules
+src/main/resources/webpack_bundles/
 
 env.properties
