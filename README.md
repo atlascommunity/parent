@@ -35,7 +35,7 @@ Standarts is a default jira-plugin structure project
 
 ## Frontend 
 
-###Frontend dependencies
+### Frontend dependencies
 
 |Package | Version | Description| Link |
 |---| ---| ---| --- |
@@ -109,4 +109,11 @@ All other tsconfig options documentation can be found here: https://www.typescri
 
 P.S: tsconfig.json with russian comments on all possible features could be found here 
 https://gist.github.com/KRostyslav/82a25c469ffa6652825d58537ac6bc22
+
+
+
+## Что осталось сделать? 
+* Настроить тесты для фронта
+* Настроить линтер(какие-то правила для идеи) для бэка
+* Настроить гит прекоммит хук для линтера (?)
 
