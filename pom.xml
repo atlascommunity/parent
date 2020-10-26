@@ -4,15 +4,43 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>ru.mail.jira.plugins</groupId>
-  <artifactId>standarts</artifactId>
-  <version>1.0.2</version>
-  <packaging>atlassian-plugin</packaging>
+  <artifactId>parent</artifactId>
+  <version>1.0.0_8.5.1</version>
+  <packaging>pom</packaging>
   <organization>
     <name>Mail.Ru Group</name>
     <url>http://corp.mail.ru/en</url>
   </organization>
-  <name>Standarts plugin</name>
-  <description>This is default jira-plugin structure project</description>
+  <name>parent</name>
+  <description>Parent POM.xml with most oftenly used pre-configured features</description>
+
+  <distributionManagement>
+    <repository>
+      <id>is-artifactory.corp.mail.ru</id>
+      <name>is-artifactory.corp.mail.ru-releases</name>
+      <url>https://is-artifactory.corp.mail.ru/artifactory/jira-plugins</url>
+    </repository>
+    <snapshotRepository>
+      <id>is-artifactory.corp.mail.ru</id>
+      <name>is-artifactory.corp.mail.ru-snapshots</name>
+      <url>https://is-artifactory.corp.mail.ru/artifactory/jira-plugins</url>
+    </snapshotRepository>
+  </distributionManagement>
+
+  <properties>
+    <!-- Spring start arguing on jira versions > 8.11.0 -->
+    <jira.version>8.5.1</jira.version>
+    <amps.version>8.0.0</amps.version>
+    <quick.reload.version>2.0.0</quick.reload.version>
+    <atlassian.plugin.key>${project.groupId}.${project.artifactId}</atlassian.plugin.key>
+    <atlassian.spring.scanner.version>2.1.8</atlassian.spring.scanner.version>
+    <javac.version>9+181-r4173-1</javac.version>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+    <maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+  </properties>
 
   <dependencies>
     <!-- Jira core dependency, it's jira-api + some internal atlassian classes used in jira -->
@@ -30,6 +58,12 @@
           <artifactId>jta</artifactId>
         </exclusion>
       </exclusions>
+    </dependency>
+    <!-- Servlet API -->
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>javax.servlet-api</artifactId>
+      <scope>provided</scope>
     </dependency>
     <!-- Active objects dependency needed for using atlassian active objects ORM-->
     <dependency>
@@ -120,6 +154,31 @@
 
   <build>
     <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.8.0</version>
+        <configuration>
+          <source>8</source>
+          <target>8</target>
+          <compilerArgs>
+            <arg>-XDcompilePolicy=simple</arg>
+            <arg>-Xplugin:ErrorProne</arg>
+          </compilerArgs>
+          <annotationProcessorPaths>
+            <path>
+              <groupId>com.google.errorprone</groupId>
+              <artifactId>error_prone_core</artifactId>
+              <version>2.4.0</version>
+            </path>
+            <path>
+              <groupId>org.projectlombok</groupId>
+              <artifactId>lombok</artifactId>
+              <version>1.18.10</version>
+            </path>
+          </annotationProcessorPaths>
+        </configuration>
+      </plugin>
       <plugin>
         <groupId>com.atlassian.maven.plugins</groupId>
         <artifactId>jira-maven-plugin</artifactId>
@@ -255,20 +314,29 @@
         </plugins>
       </build>
     </profile>
+    <profile>
+      <id>jdk8</id>
+      <activation>
+        <jdk>1.8</jdk>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <configuration>
+              <fork>true</fork>
+              <compilerArgs combine.children="append">
+                <arg>
+                  -J-Xbootclasspath/p:${settings.localRepository}/com/google/errorprone/javac/${javac.version}/javac-${javac.version}.jar
+                </arg>
+              </compilerArgs>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
   </profiles>
-
-  <properties>
-    <!-- Spring start arguing on jira versions > 8.11.0 -->
-    <jira.version>8.5.1</jira.version>
-    <amps.version>8.0.0</amps.version>
-    <quick.reload.version>2.0.0</quick.reload.version>
-    <atlassian.plugin.key>${project.groupId}.${project.artifactId}</atlassian.plugin.key>
-    <atlassian.spring.scanner.version>2.1.8</atlassian.spring.scanner.version>
-    <maven.compiler.source>1.8</maven.compiler.source>
-    <maven.compiler.target>1.8</maven.compiler.target>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-  </properties>
 
   <repositories>
     <repository>

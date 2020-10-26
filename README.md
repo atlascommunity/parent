@@ -4,6 +4,16 @@ Standarts is a default jira-plugin structure project
 
 ## Backend
 
+### Format code
+
+- Install Idea plugin google-java-format
+- Enable it for all projects in Idea Plugin Settings
+
+### Code Analysis
+
+Code verifying on compile time by [error-prone](https://errorprone.info/) maven plugin.
+
+
 ### Backend dependencies
 |Library | Version | Description|
 |---| ---| ---|
