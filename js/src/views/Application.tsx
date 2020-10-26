@@ -11,9 +11,7 @@ export const Applictaion = observer((props: ApplicationProps) => {
     <div>
       <h2>App component view here =)</h2>
       <div>
-        <button onClick={() => props.store.incrementCounter()}>
-          Counter = {props.store.counter}
-        </button>
+        <button onClick={() => props.store.incrementCounter()}>Counter = {props.store.counter}</button>
       </div>
     </div>
   );

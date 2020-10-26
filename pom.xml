@@ -1,256 +1,312 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-    <groupId>ru.mail.jira.plugins</groupId>
-    <artifactId>standarts</artifactId>
-    <version>1.0.2</version>
-    <packaging>atlassian-plugin</packaging>
-    <organization>
-        <name>Mail.Ru Group</name>
-        <url>http://corp.mail.ru/en</url>
-    </organization>
-    <name>Standarts plugin</name>
-    <description>This is default jira-plugin structure project</description>
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>ru.mail.jira.plugins</groupId>
+  <artifactId>standarts</artifactId>
+  <version>1.0.2</version>
+  <packaging>atlassian-plugin</packaging>
+  <organization>
+    <name>Mail.Ru Group</name>
+    <url>http://corp.mail.ru/en</url>
+  </organization>
+  <name>Standarts plugin</name>
+  <description>This is default jira-plugin structure project</description>
 
-    <dependencies>
-        <!-- Jira core dependency, it's jira-api + some internal atlassian classes used in jira -->
-        <dependency>
-            <groupId>com.atlassian.jira</groupId>
-            <artifactId>jira-core</artifactId>
-            <scope>provided</scope>
-            <exclusions>
-                <exclusion>
-                    <groupId>jndi</groupId>
-                    <artifactId>jndi</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>jta</groupId>
-                    <artifactId>jta</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <!-- Active objects dependency needed for using atlassian active objects ORM-->
-        <dependency>
-            <groupId>com.atlassian.activeobjects</groupId>
-            <artifactId>activeobjects-plugin</artifactId>
-            <scope>provided</scope>
-        </dependency>
-        <!-- Atlassian spring scanner dependency, inside plugin used for DI via annotations like @Component, @Component-Import -->
-        <dependency>
-            <groupId>com.atlassian.plugin</groupId>
-            <artifactId>atlassian-spring-scanner-annotation</artifactId>
-            <scope>provided</scope>
-        </dependency>
-        <!-- Atlassian rest common dependency
-        Inside plugins mostly used for it's JAX-RS annotations
-         -->
-        <dependency>
-            <groupId>com.atlassian.plugins.rest</groupId>
-            <artifactId>atlassian-rest-common</artifactId>
-            <scope>provided</scope>
-        </dependency>
-        <!-- Lombok project dependency, inside plugins used for their usefull annotations like: @Getters/@Setters/@Slf4j etc-->
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>1.18.10</version>
-            <scope>provided</scope>
-        </dependency>
-        <!-- Internal mail.ru dev team package, inside plugins usecases:
-         1) RestExecutor for old plugins @deprecated only used in commons version < 2.0
-         2) @Transactional annotation wrapping in a real jira transaction
-         3) Rest exceptions mapping ?
-        -->
-        <dependency>
-            <groupId>ru.mail.jira.plugins</groupId>
-            <artifactId>commons</artifactId>
-            <version>2.0</version>
-            <scope>compile</scope>
-            <exclusions>
-                <exclusion>
-                    <artifactId>slf4j-api</artifactId>
-                    <groupId>org.slf4j</groupId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <!-- Testing dependencies -->
-        <!-- Junit 5 -->
-        <!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter -->
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter</artifactId>
-            <version>5.7.0</version>
-            <scope>test</scope>
-        </dependency>
-        <!-- Mockito -->
-        <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-core</artifactId>
-            <version>3.5.13</version>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
+  <dependencies>
+    <!-- Jira core dependency, it's jira-api + some internal atlassian classes used in jira -->
+    <dependency>
+      <groupId>com.atlassian.jira</groupId>
+      <artifactId>jira-core</artifactId>
+      <scope>provided</scope>
+      <exclusions>
+        <exclusion>
+          <groupId>jndi</groupId>
+          <artifactId>jndi</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>jta</groupId>
+          <artifactId>jta</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <!-- Active objects dependency needed for using atlassian active objects ORM-->
+    <dependency>
+      <groupId>com.atlassian.activeobjects</groupId>
+      <artifactId>activeobjects-plugin</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <!-- Atlassian spring scanner dependency, inside plugin used for DI via annotations like @Component, @Component-Import -->
+    <dependency>
+      <groupId>com.atlassian.plugin</groupId>
+      <artifactId>atlassian-spring-scanner-annotation</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <!-- Atlassian rest common dependency
+    Inside plugins mostly used for it's JAX-RS annotations
+     -->
+    <dependency>
+      <groupId>com.atlassian.plugins.rest</groupId>
+      <artifactId>atlassian-rest-common</artifactId>
+      <scope>provided</scope>
+    </dependency>
 
-    <build>
+    <dependency>
+      <groupId>org.jetbrains</groupId>
+      <artifactId>annotations</artifactId>
+      <version>17.0.0</version>
+      <scope>compile</scope>
+    </dependency>
+
+    <!-- Lombok project dependency, inside plugins used for their usefull annotations like: @Getters/@Setters/@Slf4j etc-->
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>1.18.10</version>
+      <scope>provided</scope>
+    </dependency>
+    <!-- Internal mail.ru dev team package, inside plugins usecases:
+     1) RestExecutor for old plugins @deprecated only used in commons version < 2.0
+     2) @Transactional annotation wrapping in a real jira transaction
+     3) Rest exceptions mapping ?
+    -->
+    <dependency>
+      <groupId>ru.mail.jira.plugins</groupId>
+      <artifactId>commons</artifactId>
+      <version>2.0</version>
+      <scope>compile</scope>
+      <exclusions>
+        <exclusion>
+          <artifactId>slf4j-api</artifactId>
+          <groupId>org.slf4j</groupId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <!-- Testing dependencies -->
+    <!-- Junit 5 -->
+    <!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter -->
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter</artifactId>
+      <version>5.7.0</version>
+      <scope>test</scope>
+    </dependency>
+    <!-- Mockito -->
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-core</artifactId>
+      <version>3.5.13</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.atlassian.jira</groupId>
+      <artifactId>jira-tests</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.google.truth</groupId>
+      <artifactId>truth</artifactId>
+      <version>1.0.1</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.google.truth.extensions</groupId>
+      <artifactId>truth-java8-extension</artifactId>
+      <version>1.0.1</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>com.atlassian.maven.plugins</groupId>
+        <artifactId>jira-maven-plugin</artifactId>
+        <version>${amps.version}</version>
+        <extensions>true</extensions>
+        <configuration>
+          <productVersion>${jira.version}</productVersion>
+          <productDataVersion>${jira.version}</productDataVersion>
+          <compressJs>false</compressJs>
+          <compressCss>false</compressCss>
+          <allowGoogleTracking>false</allowGoogleTracking>
+          <skipRestDocGeneration>true</skipRestDocGeneration>
+          <skipManifestValidation>true</skipManifestValidation>
+          <extractDependencies>false</extractDependencies>
+          <enablePde>false</enablePde>
+          <enableQuickReload>true</enableQuickReload>
+          <instructions>
+            <Atlassian-Plugin-Key>${project.groupId}.${project.artifactId}</Atlassian-Plugin-Key>
+            <Atlassian-Scan-Folders>META-INF/plugin-descriptors</Atlassian-Scan-Folders>
+            <Spring-Context>*</Spring-Context>
+            <Import-Package>
+              org.springframework.osgi.*;resolution:="optional",
+              com.atlassian.jira.*;resolution:="optional",
+              *;version="0";resolution:=optional,
+            </Import-Package>
+          </instructions>
+          <pluginArtifacts>
+            <pluginArtifact>
+              <groupId>com.atlassian.labs.plugins</groupId>
+              <artifactId>quickreload</artifactId>
+              <version>${quick.reload.version}</version>
+            </pluginArtifact>
+          </pluginArtifacts>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>com.atlassian.plugin</groupId>
+        <artifactId>atlassian-spring-scanner-maven-plugin</artifactId>
+        <version>${atlassian.spring.scanner.version}</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>atlassian-spring-scanner</goal>
+            </goals>
+            <phase>process-classes</phase>
+          </execution>
+        </executions>
+        <configuration>
+          <verbose>false</verbose>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>com.diffplug.spotless</groupId>
+        <artifactId>spotless-maven-plugin</artifactId>
+        <version>2.0.2</version>
+        <configuration>
+          <ratchetFrom>origin/master</ratchetFrom>
+          <java>
+            <includes>
+              <include>src/main/java/**/*.java</include>
+              <include>src/test/java/**/*.java</include>
+            </includes>
+
+            <importOrder/>
+            <removeUnusedImports/>
+            <googleJavaFormat/>
+
+            <licenseHeader>
+              <content>/* (C)$YEAR */</content>
+            </licenseHeader>
+          </java>
+        </configuration>
+        <executions>
+          <execution>
+            <id>spotless-check</id>
+            <phase>compile</phase>
+            <goals>
+              <goal>apply</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
+  <profiles>
+    <profile>
+      <id>production</id>
+      <build>
         <plugins>
-            <plugin>
-                <groupId>com.atlassian.maven.plugins</groupId>
-                <artifactId>jira-maven-plugin</artifactId>
-                <version>${amps.version}</version>
-                <extensions>true</extensions>
+          <plugin>
+            <groupId>com.github.eirslett</groupId>
+            <artifactId>frontend-maven-plugin</artifactId>
+            <version>1.7.6</version>
+            <configuration>
+              <workingDirectory>js/</workingDirectory>
+              <installDirectory>${project.build.directory}</installDirectory>
+              <nodeVersion>v12.19.0</nodeVersion>
+              <yarnVersion>v1.22.10</yarnVersion>
+            </configuration>
+            <executions>
+              <execution>
+                <id>step-1-set-up-environment</id>
+                <goals>
+                  <goal>install-node-and-yarn</goal>
+                </goals>
+                <phase>initialize</phase>
+                <inherited>false</inherited>
+              </execution>
+              <execution>
+                <id>step-2-install-frontend-dependencies</id>
+                <goals>
+                  <goal>yarn</goal>
+                </goals>
                 <configuration>
-                    <productVersion>${jira.version}</productVersion>
-                    <productDataVersion>${jira.version}</productDataVersion>
-                    <compressJs>false</compressJs>
-                    <compressCss>false</compressCss>
-                    <allowGoogleTracking>false</allowGoogleTracking>
-                    <skipRestDocGeneration>true</skipRestDocGeneration>
-                    <skipManifestValidation>true</skipManifestValidation>
-                    <extractDependencies>false</extractDependencies>
-                    <enablePde>false</enablePde>
-                    <enableQuickReload>true</enableQuickReload>
-                    <instructions>
-                        <Atlassian-Plugin-Key>${project.groupId}.${project.artifactId}</Atlassian-Plugin-Key>
-                        <Atlassian-Scan-Folders>META-INF/plugin-descriptors</Atlassian-Scan-Folders>
-                        <Spring-Context>*</Spring-Context>
-                        <Import-Package>
-                            org.springframework.osgi.*;resolution:="optional",
-                            com.atlassian.jira.*;resolution:="optional",
-                            *;version="0";resolution:=optional,
-                        </Import-Package>
-                    </instructions>
-                    <pluginArtifacts>
-                        <pluginArtifact>
-                            <groupId>com.atlassian.labs.plugins</groupId>
-                            <artifactId>quickreload</artifactId>
-                            <version>${quick.reload.version}</version>
-                        </pluginArtifact>
-                    </pluginArtifacts>
+                  <arguments>install</arguments>
                 </configuration>
-            </plugin>
-            <plugin>
-                <groupId>com.atlassian.plugin</groupId>
-                <artifactId>atlassian-spring-scanner-maven-plugin</artifactId>
-                <version>${atlassian.spring.scanner.version}</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>atlassian-spring-scanner</goal>
-                        </goals>
-                        <phase>process-classes</phase>
-                    </execution>
-                </executions>
+                <phase>initialize</phase>
+                <inherited>false</inherited>
+              </execution>
+              <execution>
+                <id>step-3-compile-the-ui</id>
+                <goals>
+                  <goal>yarn</goal>
+                </goals>
                 <configuration>
-                    <verbose>false</verbose>
+                  <arguments>build-prod</arguments>
                 </configuration>
-            </plugin>
+                <phase>generate-resources</phase>
+              </execution>
+            </executions>
+          </plugin>
         </plugins>
-    </build>
+      </build>
+    </profile>
+  </profiles>
 
-    <profiles>
-        <profile>
-            <id>production</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>com.github.eirslett</groupId>
-                        <artifactId>frontend-maven-plugin</artifactId>
-                        <version>1.7.6</version>
-                        <configuration>
-                            <workingDirectory>js/</workingDirectory>
-                            <installDirectory>${project.build.directory}</installDirectory>
-                            <nodeVersion>v14.14.0</nodeVersion>
-                            <yarnVersion>v1.22.10</yarnVersion>
-                        </configuration>
-                        <executions>
-                            <execution>
-                                <id>step-1-set-up-environment</id>
-                                <goals>
-                                    <goal>install-node-and-yarn</goal>
-                                </goals>
-                                <phase>initialize</phase>
-                                <inherited>false</inherited>
-                            </execution>
-                            <execution>
-                                <id>step-2-install-frontend-dependencies</id>
-                                <goals>
-                                    <goal>yarn</goal>
-                                </goals>
-                                <configuration>
-                                    <arguments>install</arguments>
-                                </configuration>
-                                <phase>initialize</phase>
-                                <inherited>false</inherited>
-                            </execution>
-                            <execution>
-                                <id>step-3-compile-the-ui</id>
-                                <goals>
-                                    <goal>yarn</goal>
-                                </goals>
-                                <configuration>
-                                    <arguments>build-prod</arguments>
-                                </configuration>
-                                <phase>generate-resources</phase>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-    </profiles>
+  <properties>
+    <!-- Spring start arguing on jira versions > 8.11.0 -->
+    <jira.version>8.5.1</jira.version>
+    <amps.version>8.0.0</amps.version>
+    <quick.reload.version>2.0.0</quick.reload.version>
+    <atlassian.plugin.key>${project.groupId}.${project.artifactId}</atlassian.plugin.key>
+    <atlassian.spring.scanner.version>2.1.8</atlassian.spring.scanner.version>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+  </properties>
 
-    <properties>
-        <!-- Spring start arguing on jira versions > 8.11.0 -->
-        <jira.version>8.5.1</jira.version>
-        <amps.version>8.0.0</amps.version>
-        <quick.reload.version>2.0.0</quick.reload.version>
-        <atlassian.plugin.key>${project.groupId}.${project.artifactId}</atlassian.plugin.key>
-        <atlassian.spring.scanner.version>2.1.8</atlassian.spring.scanner.version>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    </properties>
+  <repositories>
+    <repository>
+      <id>atlassian</id>
+      <url>https://packages.atlassian.com/maven/repository/public</url>
+    </repository>
+    <repository>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+      <id>jira-plugins</id>
+      <url>https://is-artifactory.corp.mail.ru/artifactory/jira-plugins</url>
+    </repository>
+  </repositories>
 
-    <repositories>
-        <repository>
-            <id>atlassian</id>
-            <url>https://packages.atlassian.com/maven/repository/public</url>
-        </repository>
-        <repository>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-            <id>jira-plugins</id>
-            <url>https://is-artifactory.corp.mail.ru/artifactory/jira-plugins</url>
-        </repository>
-    </repositories>
+  <pluginRepositories>
+    <pluginRepository>
+      <id>atlassian</id>
+      <url>https://packages.atlassian.com/maven/repository/public</url>
+    </pluginRepository>
+    <pluginRepository>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+      <id>jira-plugins</id>
+      <url>https://is-artifactory.corp.mail.ru/artifactory/jira-plugins</url>
+    </pluginRepository>
+  </pluginRepositories>
 
-    <pluginRepositories>
-        <pluginRepository>
-            <id>atlassian</id>
-            <url>https://packages.atlassian.com/maven/repository/public</url>
-        </pluginRepository>
-        <pluginRepository>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-            <id>jira-plugins</id>
-            <url>https://is-artifactory.corp.mail.ru/artifactory/jira-plugins</url>
-        </pluginRepository>
-    </pluginRepositories>
-
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>com.atlassian.jira</groupId>
-                <artifactId>jira-project</artifactId>
-                <version>${jira.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>com.atlassian.jira</groupId>
+        <artifactId>jira-project</artifactId>
+        <version>${jira.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
 </project>

@@ -20,6 +20,8 @@ Standarts is a default jira-plugin structure project
 |---| ---| ---|
 |junit-jupiter|5.7.0| Junit 5|
 |mockito-core|3.5.13| Mockito|
+|truth|1.0.1|
+|truth-java8-extension|1.0.1|
 
 ### Backend useful commands
 
