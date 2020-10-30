@@ -19,7 +19,7 @@ Code verifying on compile time by [error-prone](https://errorprone.info/) maven 
 |---| ---| ---|
 |jira-core| provided | Jira core dependency|
 |activeobjects-plugin| provided | Active objects dependency |
-|atlassian-spring-scanner-annotation| provided | Atlassian spring scanner dependency |
+|atlassian-spring-scanner-annotation| provided | Atlassian spring scanner dependency https://bitbucket.org/atlassian/atlassian-spring-scanner/src/master/ |
 |atlassian-rest-common| provided |  Atlassian rest common dependency |
 |lombok| 1.18.10 | Lombok project dependency|
 |commons| 2.0 | Internal mail.ru dev team package for atlassian addons|

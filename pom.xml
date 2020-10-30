@@ -5,7 +5,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>ru.mail.jira.plugins</groupId>
   <artifactId>parent</artifactId>
-  <version>1.0.1_8.5.1</version>
+  <version>1.0.2_8.5.1</version>
   <packaging>pom</packaging>
   <organization>
     <name>Mail.Ru Group</name>
@@ -82,7 +82,7 @@
      -->
     <dependency>
       <groupId>com.atlassian.plugins.rest</groupId>
-      <artifactId>atlassian-rest-common</artifactId>
+      <artifactId>atlassian-rest-module</artifactId>
       <scope>provided</scope>
     </dependency>
 
@@ -197,7 +197,7 @@
           <compressCss>false</compressCss>
           <allowGoogleTracking>false</allowGoogleTracking>
           <skipRestDocGeneration>true</skipRestDocGeneration>
-          <skipManifestValidation>true</skipManifestValidation>
+          <skipManifestValidation>false</skipManifestValidation>
           <extractDependencies>false</extractDependencies>
           <enablePde>false</enablePde>
           <enableQuickReload>true</enableQuickReload>
@@ -208,6 +208,10 @@
             <Import-Package>
               org.springframework.osgi.*;resolution:="optional",
               com.atlassian.jira.*;resolution:="optional",
+              com.atlassian.event.*;resolution:="optional",
+              com.atlassian.templaterenderer.*;resolution:="optional",
+              com.atlassian.sal.*;resolution:="optional",
+              com.atlassian.activeobjects.*;resolution:="optional",
               *;version="0";resolution:=optional,
             </Import-Package>
           </instructions>
@@ -292,7 +296,7 @@
                   <goal>install-node-and-yarn</goal>
                 </goals>
                 <phase>initialize</phase>
-                <inherited>false</inherited>
+                <inherited>true</inherited>
               </execution>
               <execution>
                 <id>step-2-install-frontend-dependencies</id>
@@ -300,10 +304,10 @@
                   <goal>yarn</goal>
                 </goals>
                 <configuration>
-                  <arguments>install</arguments>
+                  <arguments>install --frozen-lockfile --ignore-optional</arguments>
                 </configuration>
                 <phase>initialize</phase>
-                <inherited>false</inherited>
+                <inherited>true</inherited>
               </execution>
               <execution>
                 <id>step-3-compile-the-ui</id>
