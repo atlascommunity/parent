@@ -1,0 +1,34 @@
+version: 2
+plan:
+  project-key: JP
+  # change 'name', 'key'
+  name: Standarts
+  key: PARENT
+
+stages:
+  - Build:
+      jobs:
+        - Build jar
+  - Cleanup:
+      final: true
+      jobs:
+        - Cleanup
+
+Build jar:
+  tasks:
+    - script:
+        - atlas-clean
+        - atlas-package -P production
+  artifacts:
+# change 'name'
+    - name: parent
+      location: target
+      pattern: '*.jar'
+      required: true
+      shared: true
+
+Cleanup:
+  tasks:
+    - clean
+    - script:
+        - atlas-clean
