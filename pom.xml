@@ -5,7 +5,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>ru.mail.jira.plugins</groupId>
   <artifactId>parent</artifactId>
-  <version>1.0.2_8.5.1</version>
+  <version>1.0.3_8.5.1</version>
   <packaging>pom</packaging>
   <organization>
     <name>Mail.Ru Group</name>
@@ -115,7 +115,18 @@
       <groupId>ru.mail.jira.plugins</groupId>
       <artifactId>commons</artifactId>
       <version>2.0</version>
-      <scope>compile</scope>
+      <scope>provided</scope>
+      <exclusions>
+        <exclusion>
+          <artifactId>slf4j-api</artifactId>
+          <groupId>org.slf4j</groupId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>io.sentry</groupId>
+      <artifactId>sentry</artifactId>
+      <version>1.1.0</version>
       <exclusions>
         <exclusion>
           <artifactId>slf4j-api</artifactId>
@@ -223,6 +234,30 @@
             </pluginArtifact>
           </pluginArtifacts>
         </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>unpack-dependencies</id>
+            <phase>initialize</phase>
+            <goals>
+              <goal>unpack</goal>
+            </goals>
+            <configuration>
+              <artifactItems>
+                <artifactItem>
+                  <groupId>ru.mail.jira.plugins</groupId>
+                  <artifactId>commons</artifactId>
+                  <version>2.0</version>
+                  <outputDirectory>${project.build.directory}/classes</outputDirectory>
+                  <includes>**/*.class</includes>
+                </artifactItem>
+              </artifactItems>
+            </configuration>
+          </execution>
+        </executions>
       </plugin>
       <plugin>
         <groupId>com.atlassian.plugin</groupId>
