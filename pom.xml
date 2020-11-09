@@ -5,7 +5,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>ru.mail.jira.plugins</groupId>
   <artifactId>parent</artifactId>
-  <version>1.0.3_8.5.1</version>
+  <version>1.0.4_8.5.1</version>
   <packaging>pom</packaging>
   <organization>
     <name>Mail.Ru Group</name>
@@ -139,8 +139,20 @@
     <!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter -->
     <dependency>
       <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter</artifactId>
+      <artifactId>junit-jupiter-api</artifactId>
       <version>5.7.0</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-engine</artifactId>
+      <version>5.7.0</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.vintage</groupId>
+      <artifactId>junit-vintage-engine</artifactId>
+      <version>5.6.2</version>
       <scope>test</scope>
     </dependency>
     <!-- Mockito -->
@@ -217,6 +229,8 @@
             <Atlassian-Scan-Folders>META-INF/plugin-descriptors</Atlassian-Scan-Folders>
             <Spring-Context>*</Spring-Context>
             <Import-Package>
+              com.atlassian.jira.plugin.webfragment.contextproviders,
+              com.atlassian.jira.plugin.webfragment.conditions,
               org.springframework.osgi.*;resolution:="optional",
               com.atlassian.jira.*;resolution:="optional",
               com.atlassian.event.*;resolution:="optional",
@@ -305,6 +319,11 @@
             </goals>
           </execution>
         </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>3.0.0-M5</version>
       </plugin>
     </plugins>
   </build>

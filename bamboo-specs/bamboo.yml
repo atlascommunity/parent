@@ -19,6 +19,11 @@ Build jar:
     - script:
         - atlas-clean
         - atlas-package -P production
+  final-tasks:
+    - test-parser:
+        type: junit
+        test-results:
+          - target/surefire-reports/*.xml
   artifacts:
 # change 'name'
     - name: parent
