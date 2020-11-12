@@ -239,9 +239,15 @@
             <Atlassian-Scan-Folders>META-INF/plugin-descriptors</Atlassian-Scan-Folders>
             <Spring-Context>*</Spring-Context>
             <Import-Package>
+              <!-- jira stuff -->
               com.atlassian.jira.plugin.webfragment.contextproviders,
               com.atlassian.jira.plugin.webfragment.conditions,
               com.atlassian.jira.plugin.workflow,
+              com.atlassian.jira.issue.customfields.searchers,
+              com.atlassian.jira.jql.operand,
+              <!-- spring imports -->
+              org.springframework.aop,
+              org.springframework.core,
               org.springframework.osgi.*;resolution:="optional",
               com.atlassian.jira.*;resolution:="optional",
               com.atlassian.event.*;resolution:="optional",
