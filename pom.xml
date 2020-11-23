@@ -5,14 +5,14 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>ru.mail.jira.plugins</groupId>
   <artifactId>parent</artifactId>
-  <version>1.0.4_8.5.1</version>
+  <version>1.1.0</version>
   <packaging>pom</packaging>
   <organization>
     <name>Mail.Ru Group</name>
     <url>http://corp.mail.ru/en</url>
   </organization>
   <name>parent</name>
-  <description>Parent POM.xml with most oftenly used pre-configured features</description>
+  <description>Parent POM.xml with most often used pre-configured features</description>
 
   <distributionManagement>
     <repository>
@@ -28,12 +28,9 @@
   </distributionManagement>
 
   <properties>
-    <!-- Spring start arguing on jira versions > 8.11.0 -->
-    <jira.version>8.5.1</jira.version>
-    <amps.version>8.0.0</amps.version>
+    <jira.version>8.13.1</jira.version>
     <quick.reload.version>2.0.0</quick.reload.version>
     <atlassian.plugin.key>${project.groupId}.${project.artifactId}</atlassian.plugin.key>
-    <atlassian.spring.scanner.version>2.1.8</atlassian.spring.scanner.version>
     <javac.version>9+181-r4173-1</javac.version>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
@@ -232,7 +229,7 @@
       <plugin>
         <groupId>com.atlassian.maven.plugins</groupId>
         <artifactId>jira-maven-plugin</artifactId>
-        <version>${amps.version}</version>
+        <version>8.0.1</version>
         <extensions>true</extensions>
         <configuration>
           <productVersion>${jira.version}</productVersion>
@@ -305,7 +302,7 @@
       <plugin>
         <groupId>com.atlassian.plugin</groupId>
         <artifactId>atlassian-spring-scanner-maven-plugin</artifactId>
-        <version>${atlassian.spring.scanner.version}</version>
+        <version>2.2.0</version>
         <executions>
           <execution>
             <goals>
