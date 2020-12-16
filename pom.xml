@@ -5,7 +5,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>ru.mail.jira.plugins</groupId>
   <artifactId>parent</artifactId>
-  <version>1.1.1</version>
+  <version>1.1.2</version>
   <packaging>pom</packaging>
   <organization>
     <name>Mail.Ru Group</name>
@@ -112,7 +112,7 @@
     <dependency>
       <groupId>ru.mail.jira.plugins</groupId>
       <artifactId>commons</artifactId>
-      <version>2.6</version>
+      <version>2.7</version>
       <scope>provided</scope>
       <exclusions>
         <exclusion>
@@ -300,7 +300,7 @@
                 <artifactItem>
                   <groupId>ru.mail.jira.plugins</groupId>
                   <artifactId>commons</artifactId>
-                  <version>2.6</version>
+                  <version>2.7</version>
                   <outputDirectory>${project.build.directory}/classes</outputDirectory>
                   <includes>**/*.class</includes>
                 </artifactItem>
