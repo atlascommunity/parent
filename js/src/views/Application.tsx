@@ -1,18 +1,23 @@
 import React from 'react';
-import { AppStore } from '../stores/AppStore';
+import { CacheProvider } from '@emotion/core';
+import { EmotionCache } from '@emotion/cache';
 import { observer } from 'mobx-react';
+import { AppStore } from '../stores/AppStore';
 
 type ApplicationProps = {
   store: AppStore;
+  styleCache: EmotionCache;
 };
 
-export const Applictaion = observer((props: ApplicationProps) => {
+export const Application = observer(({ styleCache, store }: ApplicationProps) => {
   return (
-    <div>
-      <h2>App component view here =)</h2>
+    <CacheProvider value={styleCache}>
       <div>
-        <button onClick={() => props.store.incrementCounter()}>Counter = {props.store.counter}</button>
+        <h2>App component view here =)</h2>
+        <div>
+          <button onClick={() => store.incrementCounter()}>Counter = {store.counter}</button>
+        </div>
       </div>
-    </div>
+    </CacheProvider>
   );
 });

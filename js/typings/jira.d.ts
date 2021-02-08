@@ -9,3 +9,6 @@ declare module 'jira/moment';
 declare module 'jira/util/events/types';
 declare module 'jira/util/events';
 declare module 'jira/api/projects';
+
+declare module '*.png';
+declare module '*.svg';

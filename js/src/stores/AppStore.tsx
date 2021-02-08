@@ -1,12 +1,12 @@
 import { action, makeObservable, observable } from 'mobx';
 
 export class AppStore {
+  @observable
+  counter = 0;
+
   constructor() {
     makeObservable(this);
   }
-
-  @observable
-  counter = 0;
 
   @action('incrementCounter')
   incrementCounter = () => {

@@ -69,24 +69,21 @@ mappings
     },
   })
   .set('wrm/require', {
-    dependency:
-      'com.atlassian.plugins.atlassian-plugins-webresource-rest:web-resource-manager',
+    dependency: 'com.atlassian.plugins.atlassian-plugins-webresource-rest:web-resource-manager',
     import: {
       amd: 'wrm/require',
       var: 'WRM.require',
     },
   })
   .set('wrm/data', {
-    dependency:
-      'com.atlassian.plugins.atlassian-plugins-webresource-plugin:data',
+    dependency: 'com.atlassian.plugins.atlassian-plugins-webresource-plugin:data',
     import: {
       amd: 'wrm/data',
       var: 'WRM.data',
     },
   })
   .set('wrm/context-path', {
-    dependency:
-      'com.atlassian.plugins.atlassian-plugins-webresource-plugin:context-path',
+    dependency: 'com.atlassian.plugins.atlassian-plugins-webresource-plugin:context-path',
     import: {
       amd: 'wrm/context-path',
       var: 'AJS.contextPath',
@@ -100,8 +97,7 @@ mappings
     },
   })
   .set('wrm/format', {
-    dependency:
-      'com.atlassian.plugins.atlassian-plugins-webresource-plugin:format',
+    dependency: 'com.atlassian.plugins.atlassian-plugins-webresource-plugin:format',
     import: {
       var: 'require("wrm/format")',
       amd: 'wrm/format',

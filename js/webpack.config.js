@@ -3,8 +3,8 @@ const WrmPlugin = require('atlassian-webresource-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const TerserPlugin = require('terser-webpack-plugin');
 const WebpackBar = require('webpackbar');
-const {CleanWebpackPlugin} = require('clean-webpack-plugin');
-const {DuplicatesPlugin} = require('inspectpack/plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const { DuplicatesPlugin } = require('inspectpack/plugin');
 const WRM_DEPENDENCIES_CONFIG = require(`./wrm-dependencies-conf.js`);
 
 const PLUGIN_KEY = 'ru.mail.jira.plugins.standarts'; // current plugin key
@@ -18,7 +18,7 @@ const config = {
   target: 'web',
   context: FRONTEND_SRC_DIR, // directory where to look for all entries
   entry: {
-    'example-entry': [path.join(FRONTEND_SRC_DIR, 'index.tsx')] // build entry point
+    'example-entry': [path.join(FRONTEND_SRC_DIR, 'index.tsx')], // build entry point
   },
   module: {
     rules: [
@@ -41,15 +41,15 @@ const config = {
       },
       verbose: false,
       xmlDescriptors: path.resolve(MVN_OUTPUT_DIR, 'META-INF', 'plugin-descriptors', 'wr-webpack-bundles.xml'), //An absolute filepath to where the generated XML should be output to
-      locationPrefix: PLUGIN_KEY.split('.').join('/') + '/'+ BUNDLE_OUTPUT_DIR_NAME, // Adds given prefix value to location attribute of resource node
+      locationPrefix: PLUGIN_KEY.split('.').join('/') + '/' + BUNDLE_OUTPUT_DIR_NAME, // Adds given prefix value to location attribute of resource node
     }),
-    new WebpackBar() // Elegant ProgressBar and Profiler for Webpack,
+    new WebpackBar(), // Elegant ProgressBar and Profiler for Webpack,
   ],
   externals: {
-    'AJS': {
+    AJS: {
       var: 'AJS',
     },
-    'jquery': 'require("jquery")',
+    jquery: 'require("jquery")',
     'wrm/context-path': 'require("wrm/context-path")',
     'jira/api/projects': 'require("jira/api/projects")',
     'wrm/format': 'AJS.format',
@@ -59,8 +59,8 @@ const config = {
     alias: {
       // All i18n calls really invokes via @atlassian/wrm-react-i18n plugin
       // @atlassian/wrm-react-i18n configuration could be found here: https://www.npmjs.com/package/@atlassian/i18n-properties-loader
-      'i18n': '@atlassian/wrm-react-i18n',
-    }
+      i18n: '@atlassian/wrm-react-i18n',
+    },
   },
   output: {
     // more info about webpack output config here: https://webpack.js.org/configuration/output/
@@ -96,10 +96,9 @@ module.exports = (env, argv) => {
   if (argv.mode === 'development') {
     config.watch = true;
     config.watchOptions = {
-      aggregateTimeout: 2000
+      aggregateTimeout: 2000,
     };
     config.devtool = 'source-map';
-
   } else if (argv.mode === 'production') {
     config.devtool = '';
     if (argv.analyze) {
