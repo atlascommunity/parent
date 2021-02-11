@@ -2,6 +2,7 @@
 .idea
 target
 .DS_Store
+settings.xml
 
 js/node_modules
 src/main/resources/webpack_bundles/
