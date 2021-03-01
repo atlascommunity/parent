@@ -6,7 +6,7 @@ import { Application } from './views/Application';
 import { AppStore } from './stores/AppStore';
 
 export function init(): void {
-  configure({ enforceActions: 'observed' });
+  configure({ enforceActions: 'observed', isolateGlobalState: true });
   const root = document.getElementById('standarts-root-container');
 
   if (root !== null) {
