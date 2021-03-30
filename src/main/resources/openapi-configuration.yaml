@@ -1,0 +1,10 @@
+info:
+  version: '${project.version}'
+  title: Parent Template Plugin
+  description: 'todo'
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+servers:
+  - url: https://jira.ru/rest/parent/1.0
+    description: Plugin Endpoint URL

@@ -154,6 +154,26 @@
             <artifactId>commons-io</artifactId>
             <scope>provided</scope>
         </dependency>
+
+        <dependency>
+            <groupId>io.swagger.core.v3</groupId>
+            <artifactId>swagger-jaxrs2</artifactId>
+            <version>2.1.6</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.swagger.core.v3</groupId>
+            <artifactId>swagger-annotations</artifactId>
+            <version>2.1.6</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.ws.rs</groupId>
+            <artifactId>javax.ws.rs-api</artifactId>
+            <version>2.1</version>
+            <scope>provided</scope>
+        </dependency>
         <!-- Testing dependencies -->
         <!-- Junit 5 -->
         <!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter -->
@@ -207,6 +227,7 @@
                 <directory>src/main/resources/</directory>
                 <includes>
                     <include>plugin.properties</include>
+                    <include>openapi-configuration.yaml</include>
                 </includes>
                 <filtering>true</filtering>
             </resource>
@@ -214,6 +235,7 @@
                 <directory>src/main/resources/</directory>
                 <excludes>
                     <exclude>plugin.properties</exclude>
+                    <exclude>openapi-configuration.yaml</exclude>
                 </excludes>
                 <filtering>false</filtering>
             </resource>
@@ -379,6 +401,14 @@
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <version>${javadoc.plugin.version}</version>
                 <configuration>
+                    <sourceFileIncludes>
+                        <include>
+                            **/*Service*.java
+                        </include>
+                        <include>
+                            **/*Dto.java
+                        </include>
+                    </sourceFileIncludes>
                     <doclet>io.github.atlascommunity.marklet.Marklet</doclet>
                     <docletArtifact>
                         <groupId>io.github.atlascommunity</groupId>
@@ -389,10 +419,39 @@
                     <destDir>./</destDir>
                     <additionalOptions>
                         <additionalOption>-d</additionalOption>
-                        <additionalOption>doc</additionalOption>
+                        <additionalOption>javadoc</additionalOption>
                     </additionalOptions>
                     <useStandardDocletOptions>false</useStandardDocletOptions>
                 </configuration>
+                <executions>
+                    <execution>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>javadoc</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>io.swagger.core.v3</groupId>
+                <artifactId>swagger-maven-plugin</artifactId>
+                <version>2.1.6</version>
+                <configuration>
+                    <outputFileName>openapi</outputFileName>
+                    <outputPath>${project.basedir}/swagger</outputPath>
+                    <outputFormat>YAML</outputFormat>
+                    <prettyPrint>true</prettyPrint>
+                    <resourcePackages>ru.mail.jira.plugins</resourcePackages>
+                    <openapiFilePath>${project.build.directory}/classes/openapi-configuration.yaml</openapiFilePath>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>resolve</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
