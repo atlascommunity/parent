@@ -154,12 +154,6 @@
             <artifactId>commons-io</artifactId>
             <scope>provided</scope>
         </dependency>
-
-        <dependency>
-            <groupId>io.github.atlascommunity</groupId>
-            <artifactId>marklet</artifactId>
-            <version>1.2.0</version>
-        </dependency>
         <!-- Testing dependencies -->
         <!-- Junit 5 -->
         <!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter -->
@@ -379,6 +373,27 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.0.0-M5</version>
             </plugin>
+            <!-- for documentation generation purpose -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>${javadoc.plugin.version}</version>
+                <configuration>
+                    <doclet>io.github.atlascommunity.marklet.Marklet</doclet>
+                    <docletArtifact>
+                        <groupId>io.github.atlascommunity</groupId>
+                        <artifactId>marklet</artifactId>
+                        <version>1.2.0</version>
+                    </docletArtifact>
+                    <reportOutputDirectory>./</reportOutputDirectory>
+                    <destDir>./</destDir>
+                    <additionalOptions>
+                        <additionalOption>-d</additionalOption>
+                        <additionalOption>doc</additionalOption>
+                    </additionalOptions>
+                    <useStandardDocletOptions>false</useStandardDocletOptions>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 
@@ -484,34 +499,6 @@
                             <nexusUrl>https://oss.sonatype.org/</nexusUrl>
                             <!-- Set this to true and the release will automatically proceed and sync to Central Repository will follow  -->
                             <autoReleaseAfterClose>true</autoReleaseAfterClose>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-        <!-- for documentation generation purpose -->
-        <profile>
-            <id>generate-markdown</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-javadoc-plugin</artifactId>
-                        <version>${javadoc.plugin.version}</version>
-                        <configuration>
-                            <doclet>io.github.atlascommunity.marklet.Marklet</doclet>
-                            <docletArtifact>
-                                <groupId>io.github.atlascommunity</groupId>
-                                <artifactId>marklet</artifactId>
-                                <version>1.2.0</version>
-                            </docletArtifact>
-                            <reportOutputDirectory>./</reportOutputDirectory>
-                            <destDir>./</destDir>
-                            <additionalOptions>
-                                <additionalOption>-d</additionalOption>
-                                <additionalOption>doc</additionalOption>
-                            </additionalOptions>
-                            <useStandardDocletOptions>false</useStandardDocletOptions>
                         </configuration>
                     </plugin>
                 </plugins>
