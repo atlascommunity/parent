@@ -6,7 +6,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>io.github.atlascommunity</groupId>
     <artifactId>parent</artifactId>
-    <version>2.0.3</version>
+    <version>2.0.5</version>
     <packaging>pom</packaging>
     <organization>
         <name>Mail.Ru Group</name>
@@ -50,6 +50,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <project.build.propertiesEncoding>UTF-8</project.build.propertiesEncoding>
         <javadoc.plugin.version>3.2.0</javadoc.plugin.version>
+        <cypress.command>test-dev</cypress.command>
     </properties>
 
     <dependencies>
@@ -413,7 +414,7 @@
                     <docletArtifact>
                         <groupId>io.github.atlascommunity</groupId>
                         <artifactId>marklet</artifactId>
-                        <version>1.2.0</version>
+                        <version>1.2.1</version>
                     </docletArtifact>
                     <reportOutputDirectory>./</reportOutputDirectory>
                     <destDir>./</destDir>
@@ -425,7 +426,7 @@
                 </configuration>
                 <executions>
                     <execution>
-                        <phase>generate-resources</phase>
+                        <phase>package</phase>
                         <goals>
                             <goal>javadoc</goal>
                         </goals>
@@ -443,15 +444,24 @@
                     <prettyPrint>true</prettyPrint>
                     <resourcePackages>ru.mail.jira.plugins</resourcePackages>
                     <openapiFilePath>${project.build.directory}/classes/openapi-configuration.yaml</openapiFilePath>
+                    <sortOutput>true</sortOutput>
                 </configuration>
                 <executions>
                     <execution>
-                        <phase>compile</phase>
+                        <phase>package</phase>
                         <goals>
                             <goal>resolve</goal>
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <version>3.0.0-M1</version>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
             </plugin>
         </plugins>
     </build>
@@ -500,6 +510,71 @@
                                     <arguments>build-prod</arguments>
                                 </configuration>
                                 <phase>generate-resources</phase>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>integration-test</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.github.eirslett</groupId>
+                        <artifactId>frontend-maven-plugin</artifactId>
+                        <version>1.7.6</version>
+                        <configuration>
+                            <workingDirectory>js/</workingDirectory>
+                            <installDirectory>${project.build.directory}</installDirectory>
+                            <nodeVersion>v12.19.0</nodeVersion>
+                            <yarnVersion>v1.22.10</yarnVersion>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>step-1-set-up-environment</id>
+                                <goals>
+                                    <goal>install-node-and-yarn</goal>
+                                </goals>
+                                <phase>initialize</phase>
+                                <inherited>true</inherited>
+                            </execution>
+                            <execution>
+                                <id>step-2-install-frontend-dependencies</id>
+                                <goals>
+                                    <goal>yarn</goal>
+                                </goals>
+                                <configuration>
+                                    <arguments>install --frozen-lockfile --ignore-optional</arguments>
+                                </configuration>
+                                <phase>initialize</phase>
+                                <inherited>true</inherited>
+                            </execution>
+                            <execution>
+                                <id>step-testing-prepare</id>
+                                <goals>
+                                    <goal>yarn</goal>
+                                </goals>
+                                <configuration>
+                                    <arguments>cypress install</arguments>
+                                </configuration>
+                                <phase>pre-integration-test</phase>
+                                <inherited>true</inherited>
+                            </execution>
+                            <execution>
+                                <id>step-testing</id>
+                                <goals>
+                                    <goal>yarn</goal>
+                                </goals>
+                                <configuration>
+                                    <environmentVariables>
+                                        <cypress_jira_login>${env.bamboo_cypress_jira_login}</cypress_jira_login>
+                                        <cypress_jira_password>${env.bamboo_cypress_jira_password}</cypress_jira_password>
+                                    </environmentVariables>
+                                    <arguments>${cypress.command}</arguments>
+                                </configuration>
+                                <phase>integration-test</phase>
+                                <inherited>true</inherited>
                             </execution>
                         </executions>
                     </plugin>
