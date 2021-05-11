@@ -6,7 +6,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>io.github.atlascommunity</groupId>
     <artifactId>parent</artifactId>
-    <version>2.0.8</version>
+    <version>2.0.9</version>
     <packaging>pom</packaging>
     <organization>
         <name>Mail.Ru Group</name>
@@ -433,7 +433,7 @@
                 <configuration>
                     <sourceFileIncludes>
                         <include>
-                            **/*Service*.java
+                            **/*Service.java
                         </include>
                         <include>
                             **/*Dto.java
@@ -443,7 +443,7 @@
                     <docletArtifact>
                         <groupId>io.github.atlascommunity</groupId>
                         <artifactId>marklet</artifactId>
-                        <version>1.2.1</version>
+                        <version>1.2.2</version>
                     </docletArtifact>
                     <reportOutputDirectory>./</reportOutputDirectory>
                     <destDir>./</destDir>
