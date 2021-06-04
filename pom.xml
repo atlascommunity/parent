@@ -6,7 +6,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>io.github.atlascommunity</groupId>
     <artifactId>parent</artifactId>
-    <version>2.0.9</version>
+    <version>2.0.10</version>
     <packaging>pom</packaging>
     <organization>
         <name>Mail.Ru Group</name>
@@ -51,7 +51,7 @@
         <project.build.propertiesEncoding>UTF-8</project.build.propertiesEncoding>
         <javadoc.plugin.version>3.2.0</javadoc.plugin.version>
         <cypress.command>test-dev</cypress.command>
-        <commons.version>3.6</commons.version>
+        <commons.version>3.7</commons.version>
     </properties>
 
     <dependencies>
