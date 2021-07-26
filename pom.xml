@@ -39,7 +39,7 @@
     </scm>
 
     <properties>
-        <jira.version>8.13.1</jira.version>
+        <jira.version>8.13.9</jira.version>
         <quick.reload.version>2.0.0</quick.reload.version>
         <atlassian.plugin.key>${project.groupId}.${project.artifactId}</atlassian.plugin.key>
         <javac.version>9+181-r4173-1</javac.version>
