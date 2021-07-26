@@ -6,7 +6,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>io.github.atlascommunity</groupId>
     <artifactId>parent</artifactId>
-    <version>2.0.10</version>
+    <version>2.0.11</version>
     <packaging>pom</packaging>
     <organization>
         <name>Mail.Ru Group</name>
@@ -39,7 +39,7 @@
     </scm>
 
     <properties>
-        <jira.version>8.13.1</jira.version>
+        <jira.version>8.13.9</jira.version>
         <quick.reload.version>2.0.0</quick.reload.version>
         <atlassian.plugin.key>${project.groupId}.${project.artifactId}</atlassian.plugin.key>
         <javac.version>9+181-r4173-1</javac.version>
@@ -282,6 +282,7 @@
                         <arg>-XDcompilePolicy=simple</arg>
                         <arg>-Xplugin:ErrorProne</arg>
                     </compilerArgs>
+                    <failOnWarning>true</failOnWarning>
                     <annotationProcessorPaths>
                         <path>
                             <groupId>com.google.errorprone</groupId>
@@ -299,7 +300,7 @@
             <plugin>
                 <groupId>com.atlassian.maven.plugins</groupId>
                 <artifactId>jira-maven-plugin</artifactId>
-                <version>8.1.0</version>
+                <version>8.2.3</version>
                 <extensions>true</extensions>
                 <configuration>
                     <productVersion>${jira.version}</productVersion>
@@ -374,9 +375,17 @@
                 </executions>
             </plugin>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.2.0</version>
+                <configuration>
+                    <propertiesEncoding>UTF-8</propertiesEncoding>
+                </configuration>
+            </plugin>
+            <plugin>
                 <groupId>com.atlassian.plugin</groupId>
                 <artifactId>atlassian-spring-scanner-maven-plugin</artifactId>
-                <version>2.2.0</version>
+                <version>2.2.3</version>
                 <executions>
                     <execution>
                         <goals>
@@ -425,65 +434,6 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.0.0-M5</version>
             </plugin>
-            <!-- for documentation generation purpose -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <version>${javadoc.plugin.version}</version>
-                <configuration>
-                    <sourceFileIncludes>
-                        <include>
-                            **/*Service.java
-                        </include>
-                        <include>
-                            **/*Dto.java
-                        </include>
-                    </sourceFileIncludes>
-                    <doclet>io.github.atlascommunity.marklet.Marklet</doclet>
-                    <docletArtifact>
-                        <groupId>io.github.atlascommunity</groupId>
-                        <artifactId>marklet</artifactId>
-                        <version>1.2.2</version>
-                    </docletArtifact>
-                    <reportOutputDirectory>./</reportOutputDirectory>
-                    <destDir>./</destDir>
-                    <additionalOptions>
-                        <additionalOption>-d</additionalOption>
-                        <additionalOption>javadoc</additionalOption>
-                    </additionalOptions>
-                    <useStandardDocletOptions>false</useStandardDocletOptions>
-                </configuration>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>javadoc</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>io.swagger.core.v3</groupId>
-                <artifactId>swagger-maven-plugin</artifactId>
-                <version>2.1.6</version>
-                <configuration>
-                    <outputFileName>openapi</outputFileName>
-                    <outputPath>${project.basedir}/swagger</outputPath>
-                    <outputFormat>YAML</outputFormat>
-                    <prettyPrint>true</prettyPrint>
-                    <resourcePackages>ru.mail.jira.plugins</resourcePackages>
-                    <openapiFilePath>${project.build.directory}/classes/openapi-configuration.yaml</openapiFilePath>
-                    <sortOutput>true</sortOutput>
-                </configuration>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>resolve</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-deploy-plugin</artifactId>
@@ -496,6 +446,72 @@
     </build>
 
     <profiles>
+        <profile>
+            <id>docs</id>
+            <build>
+                <plugins>
+                    <!-- for documentation generation purpose -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <version>${javadoc.plugin.version}</version>
+                        <configuration>
+                            <sourceFileIncludes>
+                                <include>
+                                    **/*Service.java
+                                </include>
+                                <include>
+                                    **/*Dto.java
+                                </include>
+                            </sourceFileIncludes>
+                            <doclet>io.github.atlascommunity.marklet.Marklet</doclet>
+                            <docletArtifact>
+                                <groupId>io.github.atlascommunity</groupId>
+                                <artifactId>marklet</artifactId>
+                                <version>1.2.2</version>
+                            </docletArtifact>
+                            <reportOutputDirectory>./</reportOutputDirectory>
+                            <destDir>./</destDir>
+                            <additionalOptions>
+                                <additionalOption>-d</additionalOption>
+                                <additionalOption>javadoc</additionalOption>
+                            </additionalOptions>
+                            <useStandardDocletOptions>false</useStandardDocletOptions>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>javadoc</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>io.swagger.core.v3</groupId>
+                        <artifactId>swagger-maven-plugin</artifactId>
+                        <version>2.1.6</version>
+                        <configuration>
+                            <outputFileName>openapi</outputFileName>
+                            <outputPath>${project.basedir}/swagger</outputPath>
+                            <outputFormat>YAML</outputFormat>
+                            <prettyPrint>true</prettyPrint>
+                            <resourcePackages>ru.mail.jira.plugins</resourcePackages>
+                            <openapiFilePath>${project.build.directory}/classes/openapi-configuration.yaml</openapiFilePath>
+                            <sortOutput>true</sortOutput>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>resolve</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
         <profile>
             <id>production</id>
             <build>
