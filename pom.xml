@@ -6,7 +6,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>io.github.atlascommunity</groupId>
     <artifactId>parent</artifactId>
-    <version>2.0.11</version>
+    <version>2.1.0</version>
     <packaging>pom</packaging>
     <organization>
         <name>Mail.Ru Group</name>
@@ -40,6 +40,7 @@
 
     <properties>
         <jira.version>8.13.9</jira.version>
+        <amps.version>8.2.3</amps.version>
         <quick.reload.version>2.0.0</quick.reload.version>
         <atlassian.plugin.key>${project.groupId}.${project.artifactId}</atlassian.plugin.key>
         <javac.version>9+181-r4173-1</javac.version>
@@ -51,7 +52,9 @@
         <project.build.propertiesEncoding>UTF-8</project.build.propertiesEncoding>
         <javadoc.plugin.version>3.2.0</javadoc.plugin.version>
         <cypress.command>test-dev</cypress.command>
-        <commons.version>3.7</commons.version>
+        <commons.version>3.8</commons.version>
+        <lombok.version>1.18.20</lombok.version>
+        <mapstruct.version>1.4.2.Final</mapstruct.version>
     </properties>
 
     <dependencies>
@@ -107,7 +110,7 @@
         <dependency>
             <groupId>org.jetbrains</groupId>
             <artifactId>annotations</artifactId>
-            <version>17.0.0</version>
+            <version>21.0.1</version>
             <scope>compile</scope>
         </dependency>
 
@@ -115,7 +118,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.10</version>
+            <version>${lombok.version}</version>
             <scope>provided</scope>
         </dependency>
         <!-- Internal mail.ru dev team package, inside plugins usecases:
@@ -149,7 +152,7 @@
         <dependency>
             <groupId>com.konghq</groupId>
             <artifactId>unirest-java</artifactId>
-            <version>3.11.09</version>
+            <version>3.11.12</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.apache.httpcomponents</groupId>
@@ -174,6 +177,12 @@
             <artifactId>gson</artifactId>
         </dependency>
         <dependency>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct</artifactId>
+            <version>${mapstruct.version}</version>
+        </dependency>
+
+        <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
             <scope>provided</scope>
@@ -187,13 +196,13 @@
         <dependency>
             <groupId>io.swagger.core.v3</groupId>
             <artifactId>swagger-jaxrs2</artifactId>
-            <version>2.1.6</version>
+            <version>2.1.10</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>io.swagger.core.v3</groupId>
             <artifactId>swagger-annotations</artifactId>
-            <version>2.1.6</version>
+            <version>2.1.10</version>
             <scope>provided</scope>
         </dependency>
 
@@ -209,26 +218,26 @@
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
-            <version>5.7.0</version>
+            <version>5.7.2</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
-            <version>5.7.0</version>
+            <version>5.7.2</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.junit.vintage</groupId>
             <artifactId>junit-vintage-engine</artifactId>
-            <version>5.6.2</version>
+            <version>5.7.2</version>
             <scope>test</scope>
         </dependency>
         <!-- Mockito -->
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
-            <version>3.5.13</version>
+            <version>3.11.2</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -239,13 +248,13 @@
         <dependency>
             <groupId>com.google.truth</groupId>
             <artifactId>truth</artifactId>
-            <version>1.0.1</version>
+            <version>1.1.3</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>com.google.truth.extensions</groupId>
             <artifactId>truth-java8-extension</artifactId>
-            <version>1.0.1</version>
+            <version>1.1.3</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -292,7 +301,12 @@
                         <path>
                             <groupId>org.projectlombok</groupId>
                             <artifactId>lombok</artifactId>
-                            <version>1.18.10</version>
+                            <version>${lombok.version}</version>
+                        </path>
+                        <path>
+                            <groupId>org.mapstruct</groupId>
+                            <artifactId>mapstruct-processor</artifactId>
+                            <version>${mapstruct.version}</version>
                         </path>
                     </annotationProcessorPaths>
                 </configuration>
@@ -300,7 +314,7 @@
             <plugin>
                 <groupId>com.atlassian.maven.plugins</groupId>
                 <artifactId>jira-maven-plugin</artifactId>
-                <version>8.2.3</version>
+                <version>${amps.version}</version>
                 <extensions>true</extensions>
                 <configuration>
                     <productVersion>${jira.version}</productVersion>

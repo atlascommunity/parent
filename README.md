@@ -4,7 +4,7 @@ Standarts is a default jira-plugin structure project
 
 # Publish 
 
-mvn -B -s settings.xml -P publish deploy
+mvn -B -s settings.xml -P publish clean deploy
 
 ## Backend
 
