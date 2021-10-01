@@ -9,7 +9,7 @@ export class AppStore {
   }
 
   @action('incrementCounter')
-  incrementCounter = () => {
+  incrementCounter: () => void = () => {
     this.counter++;
   };
 }

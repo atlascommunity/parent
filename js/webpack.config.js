@@ -7,7 +7,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const { DuplicatesPlugin } = require('inspectpack/plugin');
 const WRM_DEPENDENCIES_CONFIG = require(`./wrm-dependencies-conf.js`);
 
-const PLUGIN_KEY = 'ru.mail.jira.plugins.standarts'; // current plugin key
+const PLUGIN_KEY = 'io.github.atlascommunity.parent'; // current plugin key
 const MVN_OUTPUT_DIR = path.join(__dirname, '..', 'target', 'classes'); // atlassian mvn plugin classes output
 const FRONTEND_SRC_DIR = path.join(__dirname, 'src'); // directory with all frontend sources
 const BUNDLE_OUTPUT_DIR_NAME = 'webpack_bundles'; // directory which contains all build resources (bundles)
@@ -66,13 +66,13 @@ const config = {
     // more info about webpack output config here: https://webpack.js.org/configuration/output/
     filename: '[name].js', // regular file, filename
     chunkFilename: '[name].js', // chunk filename
-    sourceMapFilename: 'assets/[name].js._map', //source-map filename if has any
+    sourceMapFilename: 'assets/[name].js.map', //source-map filename if has any
     path: path.resolve(FRONTEND_TARGET_DIR), // directory with all output files
   },
   optimization: {
     // default code-splitting here  via  internal webpack SplitChunksPlugin
     // more info here: https://webpack.js.org/plugins/split-chunks-plugin/#optimizationsplitchunks
-    namedChunks: true,
+    chunkIds: 'named',
     runtimeChunk: {
       name: 'manifest',
     },
@@ -100,7 +100,7 @@ module.exports = (env, argv) => {
     };
     config.devtool = 'source-map';
   } else if (argv.mode === 'production') {
-    config.devtool = '';
+    config.devtool = undefined;
     if (argv.analyze) {
       // Here we go if now is: yarn analyze command running
       config.plugins.push(new DuplicatesPlugin()); // Shows package duplicates during build, if has any
@@ -116,10 +116,8 @@ module.exports = (env, argv) => {
         terserOptions: {
           mangle: {
             // Don't mangle usage of I18n.getText() function
-            reserved: ['I18n', 'getText'], // Part of @atlassian/wrm-react-i18n configuration
+            reserved: ['I18n', 'getText'],
           },
-          parallel: true, // runs all js minification tasks in parallel threads
-          sourceMap: !devMode,
         },
       }),
     ],
