@@ -7,6 +7,5 @@ module.exports = {
   singleQuote: true,
   useTabs: false,
   bracketSpacing: true,
-  jsxBracketSameLine: true,
   arrowParens: 'always',
 };
