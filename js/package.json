@@ -51,7 +51,7 @@
     "@emotion/cache": "^10.0.29",
     "@emotion/core": "^10.1.1",
     "@emotion/styled": "^10.0.27",
-    "axios": "^0.21.1",
+    "axios": "^0.21.2",
     "dompurify": "^2.2.6",
     "emotion": "^10.0.27",
     "mobx": "^6.1.5",
