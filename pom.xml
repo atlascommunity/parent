@@ -6,7 +6,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>io.github.atlascommunity</groupId>
     <artifactId>parent</artifactId>
-    <version>2.1.6</version>
+    <version>2.1.8</version>
     <packaging>pom</packaging>
     <organization>
         <name>Mail.Ru Group</name>
@@ -43,6 +43,7 @@
         <amps.version>8.2.3</amps.version>
         <quick.reload.version>2.0.0</quick.reload.version>
         <atlassian.plugin.key>${project.groupId}.${project.artifactId}</atlassian.plugin.key>
+        <revision>${git.closest.tag.name}.${git.commit.time}</revision>
         <javac.version>9+181-r4173-1</javac.version>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
@@ -52,7 +53,7 @@
         <project.build.propertiesEncoding>UTF-8</project.build.propertiesEncoding>
         <javadoc.plugin.version>3.2.0</javadoc.plugin.version>
         <cypress.command>test-dev</cypress.command>
-        <commons.version>3.8.6</commons.version>
+        <commons.version>3.8.8</commons.version>
         <lombok.version>1.18.20</lombok.version>
         <mapstruct.version>1.4.2.Final</mapstruct.version>
     </properties>
@@ -456,6 +457,24 @@
                     <skip>true</skip>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>io.github.git-commit-id</groupId>
+                <artifactId>git-commit-id-maven-plugin</artifactId>
+                <version>4.9.9</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>revision</goal>
+                        </goals>
+                        <phase>initialize</phase>
+                    </execution>
+                </executions>
+                <configuration>
+                    <dateFormat>yyyyMMddHHmmss</dateFormat>
+                    <dotGitDirectory>${project.basedir}/.git</dotGitDirectory>
+                    <generateGitPropertiesFile>false</generateGitPropertiesFile>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 
@@ -538,7 +557,7 @@
                             <workingDirectory>js/</workingDirectory>
                             <installDirectory>${project.build.directory}</installDirectory>
                             <nodeVersion>v12.19.0</nodeVersion>
-                            <yarnVersion>v1.22.10</yarnVersion>
+                            <yarnVersion>v1.22.15</yarnVersion>
                         </configuration>
                         <executions>
                             <execution>
