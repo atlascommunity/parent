@@ -6,7 +6,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>io.github.atlascommunity</groupId>
     <artifactId>parent</artifactId>
-    <version>2.1.9</version>
+    <version>2.1.12</version>
     <packaging>pom</packaging>
     <organization>
         <name>Mail.Ru Group</name>
@@ -290,7 +290,7 @@
                     <target>8</target>
                     <compilerArgs>
                         <arg>-XDcompilePolicy=simple</arg>
-                        <arg>-Xplugin:ErrorProne -Xep:DeadException:WARN -Xep:GuardedBy:OFF -XepDisableWarningsInGeneratedCode</arg>
+                        <arg>-Xplugin:ErrorProne -Xep:DeadException:WARN -Xep:GuardedBy:OFF -XepDisableWarningsInGeneratedCode -XepExcludedPaths:.*/target/generated-sources/.* -Xep:SameNameButDifferent:OFF</arg>
                     </compilerArgs>
                     <failOnWarning>true</failOnWarning>
                     <annotationProcessorPaths>
@@ -676,7 +676,7 @@
                                 <arg>
                                     -J-Xbootclasspath/p:${settings.localRepository}/com/google/errorprone/javac/${javac.version}/javac-${javac.version}.jar
                                 </arg>
-                                <arg>-Xplugin:ErrorProne -Xep:DeadException:WARN -Xep:GuardedBy:OFF -XepDisableWarningsInGeneratedCode</arg>
+                                <arg>-Xplugin:ErrorProne -Xep:DeadException:WARN -Xep:GuardedBy:OFF -XepDisableWarningsInGeneratedCode -XepExcludedPaths:.*/target/generated-sources/.*  -Xep:SameNameButDifferent:OFF</arg>
                             </compilerArgs>
                         </configuration>
                     </plugin>
