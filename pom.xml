@@ -6,11 +6,11 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>io.github.atlascommunity</groupId>
     <artifactId>parent</artifactId>
-    <version>2.1.12</version>
+    <version>3.0.1</version>
     <packaging>pom</packaging>
     <organization>
-        <name>Mail.Ru Group</name>
-        <url>http://corp.mail.ru/en</url>
+        <name>VK</name>
+        <url>https://vk.company</url>
     </organization>
     <name>parent</name>
     <description>Parent POM.xml with most often used pre-configured features</description>
@@ -27,8 +27,8 @@
         <developer>
             <name>Ivan Mashintsev</name>
             <email>mashintsev@gmail.com</email>
-            <organization>Mail.ru Group</organization>
-            <organizationUrl>https://www.corp.mail.ru/en/</organizationUrl>
+            <organization>VK</organization>
+            <organizationUrl>https://vk.company</organizationUrl>
         </developer>
     </developers>
 
@@ -39,7 +39,7 @@
     </scm>
 
     <properties>
-        <jira.version>8.13.9</jira.version>
+        <jira.version>8.20.2</jira.version>
         <amps.version>8.2.3</amps.version>
         <quick.reload.version>2.0.0</quick.reload.version>
         <atlassian.plugin.key>${project.groupId}.${project.artifactId}</atlassian.plugin.key>
@@ -53,7 +53,7 @@
         <project.build.propertiesEncoding>UTF-8</project.build.propertiesEncoding>
         <javadoc.plugin.version>3.2.0</javadoc.plugin.version>
         <cypress.command>test-dev</cypress.command>
-        <commons.version>3.8.8</commons.version>
+        <commons.version>3.8.9</commons.version>
         <lombok.version>1.18.20</lombok.version>
         <mapstruct.version>1.4.2.Final</mapstruct.version>
     </properties>
@@ -142,13 +142,7 @@
         <dependency>
             <groupId>io.sentry</groupId>
             <artifactId>sentry</artifactId>
-            <version>1.7.30</version>
-            <exclusions>
-                <exclusion>
-                    <artifactId>slf4j-api</artifactId>
-                    <groupId>org.slf4j</groupId>
-                </exclusion>
-            </exclusions>
+            <version>5.4.3</version>
         </dependency>
         <dependency>
             <groupId>com.konghq</groupId>
