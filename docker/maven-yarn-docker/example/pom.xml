@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>io.github.atlascommunity</groupId>
+    <artifactId>parent</artifactId>
+    <version>3.0.5</version>
+  </parent>
+
+  <groupId>ru.mail.jira.plugins</groupId>
+  <artifactId>example</artifactId>
+  <version>3.0.5</version>
+
+  <organization>
+    <name>VK</name>
+    <url>https://vk.company</url>
+  </organization>
+
+  <name>Example</name>
+  <description>Example</description>
+  <packaging>atlassian-plugin</packaging>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>io.github.git-commit-id</groupId>
+        <artifactId>git-commit-id-maven-plugin</artifactId>
+        <version>4.9.9</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>revision</goal>
+            </goals>
+            <phase>none</phase>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>
