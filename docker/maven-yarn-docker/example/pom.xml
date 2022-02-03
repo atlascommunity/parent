@@ -5,12 +5,12 @@
   <parent>
     <groupId>io.github.atlascommunity</groupId>
     <artifactId>parent</artifactId>
-    <version>3.0.5</version>
+    <version>3.0.6</version>
   </parent>
 
   <groupId>ru.mail.jira.plugins</groupId>
   <artifactId>example</artifactId>
-  <version>3.0.5</version>
+  <version>3.0.6</version>
 
   <organization>
     <name>VK</name>

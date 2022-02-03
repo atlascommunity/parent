@@ -14,6 +14,7 @@ RUN echo $'[Artifactory]\nname=Artifactory\nbaseurl=https://packages.atlassian.c
 
 COPY ./example /example
 RUN cd /example && atlas-package
+RUN cd /example && atlas-mvn org.owasp:dependency-check-maven:check
 RUN rm -rf /example/target
 
 # install node + yarn

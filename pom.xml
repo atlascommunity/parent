@@ -6,7 +6,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>io.github.atlascommunity</groupId>
     <artifactId>parent</artifactId>
-    <version>3.0.5</version>
+    <version>3.0.6</version>
     <packaging>pom</packaging>
     <organization>
         <name>VK</name>
@@ -466,6 +466,29 @@
                     <dateFormat>yyyyMMddHHmmss</dateFormat>
                     <dotGitDirectory>${project.basedir}/.git</dotGitDirectory>
                     <generateGitPropertiesFile>false</generateGitPropertiesFile>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.owasp</groupId>
+                <artifactId>dependency-check-maven</artifactId>
+                <version>6.5.3</version>
+                <configuration>
+                    <skipProvidedScope>true</skipProvidedScope>
+                    <failBuildOnCVSS>8</failBuildOnCVSS>
+                    <formats>junit,html</formats>
+                    <prettyPrint>true</prettyPrint>
+                    <yarnAuditAnalyzerEnabled>true</yarnAuditAnalyzerEnabled>
+                    <nodeAuditSkipDevDependencies>true</nodeAuditSkipDevDependencies>
+                    <nodePackageSkipDevDependencies>true</nodePackageSkipDevDependencies>
+                    <scanSet>
+                        <fileSets>
+                            <directory>./</directory>
+                            <includes>
+                                <include>js/yarn.lock</include>
+                                <include>ts/yarn.lock</include>
+                            </includes>
+                        </fileSets>
+                    </scanSet>
                 </configuration>
             </plugin>
         </plugins>
