@@ -6,7 +6,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>io.github.atlascommunity</groupId>
     <artifactId>parent</artifactId>
-    <version>3.0.4</version>
+    <version>3.0.8</version>
     <packaging>pom</packaging>
     <organization>
         <name>VK</name>
@@ -39,21 +39,21 @@
     </scm>
 
     <properties>
-        <jira.version>8.20.2</jira.version>
+        <jira.version>8.20.4</jira.version>
         <amps.version>8.2.3</amps.version>
         <quick.reload.version>2.0.0</quick.reload.version>
         <atlassian.plugin.key>${project.groupId}.${project.artifactId}</atlassian.plugin.key>
         <revision>${git.closest.tag.name}.${git.commit.time}</revision>
         <javac.version>9+181-r4173-1</javac.version>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.source>${java.specification.version}</maven.compiler.source>
+        <maven.compiler.target>${java.specification.version}</maven.compiler.target>
         <maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <project.build.propertiesEncoding>UTF-8</project.build.propertiesEncoding>
         <javadoc.plugin.version>3.2.0</javadoc.plugin.version>
         <cypress.command>test-dev</cypress.command>
-        <commons.version>3.8.12</commons.version>
+        <commons.version>3.8.13</commons.version>
         <lombok.version>1.18.20</lombok.version>
         <mapstruct.version>1.4.2.Final</mapstruct.version>
     </properties>
@@ -281,8 +281,6 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.1</version>
                 <configuration>
-                    <source>8</source>
-                    <target>8</target>
                     <compilerArgs>
                         <arg>-XDcompilePolicy=simple</arg>
                         <arg>-Xplugin:ErrorProne -Xep:DeadException:WARN -Xep:GuardedBy:OFF -XepDisableWarningsInGeneratedCode -XepExcludedPaths:.*/target/generated-sources/.* -Xep:SameNameButDifferent:OFF</arg>
@@ -470,6 +468,30 @@
                     <generateGitPropertiesFile>false</generateGitPropertiesFile>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.owasp</groupId>
+                <artifactId>dependency-check-maven</artifactId>
+                <version>6.5.3</version>
+                <configuration>
+                    <skipProvidedScope>true</skipProvidedScope>
+                    <failBuildOnCVSS>8</failBuildOnCVSS>
+                    <formats>junit,html</formats>
+                    <prettyPrint>true</prettyPrint>
+                    <yarnAuditAnalyzerEnabled>true</yarnAuditAnalyzerEnabled>
+                    <nodeAuditSkipDevDependencies>true</nodeAuditSkipDevDependencies>
+                    <nodePackageSkipDevDependencies>true</nodePackageSkipDevDependencies>
+                    <assemblyAnalyzerEnabled>false</assemblyAnalyzerEnabled>
+                    <scanSet>
+                        <fileSets>
+                            <directory>./</directory>
+                            <includes>
+                                <include>js/yarn.lock</include>
+                                <include>ts/yarn.lock</include>
+                            </includes>
+                        </fileSets>
+                    </scanSet>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 
@@ -490,6 +512,9 @@
                                 </include>
                                 <include>
                                     **/*Dto.java
+                                </include>
+                                <include>
+                                    **/*Function.java
                                 </include>
                             </sourceFileIncludes>
                             <doclet>io.github.atlascommunity.marklet.Marklet</doclet>
