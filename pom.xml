@@ -6,7 +6,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>io.github.atlascommunity</groupId>
     <artifactId>parent</artifactId>
-    <version>3.0.6</version>
+    <version>3.0.8</version>
     <packaging>pom</packaging>
     <organization>
         <name>VK</name>
@@ -53,7 +53,7 @@
         <project.build.propertiesEncoding>UTF-8</project.build.propertiesEncoding>
         <javadoc.plugin.version>3.2.0</javadoc.plugin.version>
         <cypress.command>test-dev</cypress.command>
-        <commons.version>3.8.12</commons.version>
+        <commons.version>3.8.13</commons.version>
         <lombok.version>1.18.20</lombok.version>
         <mapstruct.version>1.4.2.Final</mapstruct.version>
     </properties>
@@ -480,6 +480,7 @@
                     <yarnAuditAnalyzerEnabled>true</yarnAuditAnalyzerEnabled>
                     <nodeAuditSkipDevDependencies>true</nodeAuditSkipDevDependencies>
                     <nodePackageSkipDevDependencies>true</nodePackageSkipDevDependencies>
+                    <assemblyAnalyzerEnabled>false</assemblyAnalyzerEnabled>
                     <scanSet>
                         <fileSets>
                             <directory>./</directory>
